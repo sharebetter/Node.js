@@ -2,7 +2,7 @@
 node express框架的案例
 
 ## 用到的技术栈
-###express项目：
+### express项目：
 node express,mysql,包含用户登录注册等表单提交功能，session,cookie用户信息保存。
 
 ### blog项目：
