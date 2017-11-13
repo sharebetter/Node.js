@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+ <h1>用户登录</h1>
+    <input class="user" type="text" name="user" id="" value="" />
+    <input class="pass" type="text" name="pass" id="" value="" />
+    <input class="submit" type="submit" name="" id="" value="提交" />    
+ <script src="/jquery-1.11.0.js"></script>
+ <script type="text/javascript">
+  $('.submit').click(function(){
+      $.ajax({
+        url:'login',
+        data:{
+          user:$('.user').val(),
+          pass:$('.pass').val()
+        },
+        type:'post',
+        dataType:'json',
+        success:function(){
+         location.href="index"
+        },
+        error:function(data){
+          alert(data.responseText);
+        }
+      })
+  })
+ </script>
+</body>
+</html>

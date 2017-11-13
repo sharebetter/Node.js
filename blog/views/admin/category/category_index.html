@@ -1,0 +1,39 @@
+{% extends '../layout.html' %}
+{% block main %}
+<ol class="breadcrumb">
+	<li><a href="/admin">后台首页</a></li>
+	<li><span>分类管理</span></a></li>
+</ol>
+<div class="container">
+  <h3>分类列表</h3>
+  <span style="float: right; margin-right: 10%;"><a href="/admin/category/add">添加分类</a></span>
+	<table class="table table-hover table-bordered table-striped">
+		<tr>
+			<th>ID</th>
+			<th>类名</th>
+			<th>操作</th>
+		</tr>
+		{% for cate in cates%}
+		<tr>
+			<td>{{cate._id.toString()}}</td>
+			<td>{{cate.name}}</td>
+			<td>
+			  <a href="/admin/category/edit?id={{cate._id.toString()}}">编辑 |</a>
+			  
+				<a href="javascript:" class="categoryDelt">
+				  <input type="hidden" name="user_id" value="{{cate._id.toString()}}" />
+				  删除</a>				
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	<nav>
+    <ul class="pager">
+      <li class="previous"><a href="/admin/category?page={{page-1}}">&larr;上一页</a></li>
+      <li>一共{{count}}页,当前页为：{{page}}页</li>
+      <li class="next"><a href="/admin/category?page={{page+1}}">下一页&rarr;</a></li>
+    </ul>
+  </nav>
+</div>
+
+{% endblock %}

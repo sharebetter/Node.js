@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block main %}
+<ol class="breadcrumb">
+	<li><a href="/admin">后台首页</a></li>
+	{% if title%}
+	<li><a href="{{url}}">{{title}}</a></li>
+	{% else%}
+	<li><a href="/admin/category">分类管理</a></li>
+	{% endif%}
+	<li><span>成功提示</span></li>
+</ol>
+<div class="container" style="margin-top: 20px">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">成功提示:</h3>
+		</div>
+		<div class="panel-body">
+			<p  style="color: red">{{message}}</p>
+		</div>
+		<div class="panel-footer">
+			<a href="{{url}}" class="jump">3秒后跳转</a>
+		</div>
+	</div>
+</div>
+{% endblock %}

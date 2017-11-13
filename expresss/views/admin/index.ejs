@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+ <h1>管理员登录成功</h1>
+ <%if(locals.result){%>
+      <%-locals.result%> 
+ <%}%>
+ <h2><a href="logout">退出</a></h2>
+ <table border="1" cellspacing="" cellpadding="" width="700px" align="center">
+  <tr>
+      <td>id</td>
+    <td>username</td>
+    <td>password</td>
+    <td>isadmin</td>
+    <td>删除</td>
+    <td>编辑</td>     
+  </tr>
+  <%if(locals.user){%>
+      <%for(var i =0;i<locals.user.length;i++){%> 
+         <tr>
+            <th><%-locals.user[i].id%></th>
+            <th><%-locals.user[i].username%></th>
+            <th><%-locals.user[i].password%></th>
+            <th><%-locals.user[i].isadmin%></th>
+            <th><button class="delete" value=<%-locals.user[i].id%>>删除</button></th>
+            <th><button class="edit">修改</button></th>            
+         </tr>
+      <%}%>
+  <%}%>
+ </table>
+ <script src="/jquery-1.11.0.js"></script>
+ <script type="text/javascript">
+  $('.delete').click(function(){
+    var id=$(this).val();
+    var index=$(this).index('.delete')+1;
+    console.log(index)
+      $.ajax({
+        url:'delete',
+        data:{
+          id:id
+        },
+        type:'post',
+        dataType:'json',
+        success:function(){
+          $('tr').eq(index).hide();
+          console.log($('tr').eq(index))
+        }
+      })
+  })
+ </script>
+</body>
+</html>
