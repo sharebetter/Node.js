@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <title>博客</title>
   <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="public/css/main.css">
- 
+  <link rel="stylesheet" type="text/css" href="/public/css/main.css">
+ <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
 </head>
 <body>
   <div class="blog-header">
-    <div class="blog-log"></div>
+    <div class="blog-log">
+      <canvas id="canvas"></canvas>
+    </div>
     <div class="blog-nav">
       <ul>         
         {%if cateId===''%} 
@@ -67,7 +70,7 @@
               </li>
             </ul>
         </div>
-      {% endif %}
+      
       <div id="regist" class="user-action" hidden>
         <h4><span>用户注册</span></h4>
           <ul class="form-ul login-ul">
@@ -92,6 +95,7 @@
             </li>
           </ul>
       </div>
+      {% endif %}
       <div class="user-action">
         <h4><span>社区</span></h4>
         <ul class="shequ">
@@ -103,6 +107,10 @@
   </div>
    <script type="text/javascript" src="/public/js/jquery-1.11.0.js"></script>
   <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+   <script src="/public/js/marked.min.js"></script>
+   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script type="text/javascript" src="/public/js/index.js"></script>
+  <script type="text/javascript" src="/public/js/comment.js"></script>
+   <script type="text/javascript" src="/public/js/fireflower.js"></script>
 </body>
 </html>

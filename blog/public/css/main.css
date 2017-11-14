@@ -24,18 +24,27 @@ a{
 /* 
   blog 头
  */
+canvas {
+  cursor: crosshair;
+  display: block;
+  height: 180px;
+  width: 100%;
+  
+}
 .blog-header{
-	height: 180px;
+	height: 220px;
 }
 .blog-header .blog-log{
-	height: 80%;
-	width: 100%;
-	background-size: 100% 100%;
+	height: 90%;
+	width: 65%;
 	background-repeat: no-repeat;
-	background-image: url('../image/header-log.jpg');
+	background-image:url(../image/tc-1.jpg);
+	background-size: 100% 180px;
+	margin: 0 auto;
+	
 }
 .blog-nav{
-	height: 20%;
+	height: 10%;
 }
 .blog-nav ul{
 	height: 100%;
@@ -210,6 +219,9 @@ a{
 	color: red;
 	font-size: 13px;
 }
+.comment .message{
+  color:red
+}
 
 .content-page, .comment{
 	width: 70%;
@@ -273,9 +285,17 @@ a{
 	color: #999;
 }
 .comment-list li{
-	padding:-top 10px;
+	margin-bottom: 10px;
 }
 .comment-page{
 	width: 100%;
 	margin: 0;
+}
+.comment-list .coms{
+  margin-left:20px;
+  color: black;
+  line-height: 30px;
+}
+.comment-list span:first-of-type{
+  color: goldenrod;
 }

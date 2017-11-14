@@ -18,6 +18,9 @@
     "express": "latest",
     "markdown": "latest",
     "mongoose": "latest",
-    "swig": "latest"
+    "swig": "latest",
+    "marked": "^0.3.6",
+    "morgan": "~1.8.1",
+    "serve-favicon": "~2.4.2"
   }
 }

@@ -15,19 +15,20 @@
 			<h3 class="name">评论</h3>
 			<span class="comment-total">一共有{{content.comment.length}}条评论</span>
 		</div>
-		<div>
-			<div class="input-group">
-                <input type="text" name="content"  id="content" placeholder="输入评论内容" class="form-control"/>
-                <input type="hidden" id="contentId" value="{{content._id.toString()}}">
-                <div class="input-group-btn">
-                    <button class="submit btn btn-default">评论</button>
-                </div>
-            </div>
-		</div>
-		{% if !userInfo._id%}
+<!--带文章id的隐藏域-->
+    <input type="hidden" id="contentId" value="{{content._id.toString()}}">
+		{% if !userInfo._id%}	
   		<div class="login-msg">
   			<span>你还没登陆，请先登录</span>
   		</div>
+  	{% else%}
+  	<div class="input-group"> 
+      <input type="text" name="content"  id="content" placeholder="输入评论内容" class="form-control"/>
+      <div class="input-group-btn">
+          <button class="submit btn btn-primary">评论</button>
+      </div>
+    </div>
+    <p class="message"></p>
 		{%  endif %}
 		{%  if content.comment.length == 0 %}
 		<div class="no-msg">
@@ -35,20 +36,21 @@
 		</div>
 		{% endif %}
 		<ul class="comment-list">
-			<!--s {% for list in content.comment %}
-			<li>
+		  {% for list in content.comment %}
+			<!--<li>
 				<div class="clearfix">
-				<a  href="#" class="pull-left">{{list.username}}</a>
+				<a  href="javascript:" class="pull-left">{{list.username}}</a><br/>
+				<span>评论：</span><span class="coms">{{list.userComment}}</span>
 				<span class="pull-right">{{list.postDate|date('Y-m-d H:i:s',-8*60)}}</span>
 				</div>
-				<p>{{list.content}}</p>
-			</li>
-			{% endfor%} -->
+        <p></p>
+			</li>-->
+			{% endfor%} 
 		</ul>
 		<ul class="content-page clearfix comment-page">
 			<li class="prev">
 				
-				<a href="javascript:;">上一页</a>
+				<a href="javascript:;">没有上一页</a>
 			</li>
 			<li class="next">
 				<a href="javascript:;">下一页</a>

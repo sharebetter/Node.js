@@ -1,6 +1,6 @@
 $(function(){
   $('#regist').find('a').click(function(){   
-      console.log(2333)
+//    console.log(2333)
       $('#login').show();
       $('#regist').hide();
   })
@@ -75,7 +75,7 @@ $(function(){
             _id:id
           },
           success:function(data){        
-             console.log(data.data);
+//           console.log(data.data);
              if(data.data==1){
                $('tr').eq(index).hide();            
              }else if(data.data==2){
@@ -89,7 +89,7 @@ $(function(){
       });
     }    
   })
-//内容删除
+//管理员内容删除
   $('.contentDelt').click(function(){
     var deleBool = window.confirm('确定删除吗？');
     if(deleBool){
@@ -103,7 +103,7 @@ $(function(){
             _id:id
           },
           success:function(data){        
-             console.log(data.data);
+//           console.log(data.data);
              if(data.data==1){
                $('tr').eq(index).hide();            
              }else{
@@ -113,12 +113,13 @@ $(function(){
       });
     }    
   })
-  //
-   var len = $('table tr').length;
+    //界面  序号
+    var len = $('table tr').length;
     for(var i = 1;i<len;i++){
         $('table tr:eq('+i+') td:first').text(i);
     }
     
+    //界面跳转
     if($('.panel-footer .jump').attr('href')){  
       var time=3;
       var url=$('.panel-footer .jump').attr('href');
@@ -134,5 +135,11 @@ $(function(){
             clearInterval(a);
           }
       },1000)
-    }
+    }  
+    
+    $('.blog-item').hide();
+    $('.content-page').hide();
+    
+    $('.blog-item').slideToggle(500);
+    $('.content-page').slideToggle(500);
 })

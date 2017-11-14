@@ -126,7 +126,7 @@ router.post('/edit',function(req, res, next){
           url:'/admin/content'
         })
       }else {
-        console.log(222)
+//      console.log(222)
         return Content.update({
           _id:id
         },{
