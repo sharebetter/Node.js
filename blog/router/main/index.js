@@ -25,7 +25,7 @@ router.get('/',(req,res)=>{
     page = 1;
   }
   let cate_id=req.query.cateId || '';
-  console.log(cate_id+'123')
+//console.log(cate_id+'123')
   let where = {};
   if(cate_id){
     where.category = cate_id;

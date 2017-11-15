@@ -210,13 +210,15 @@ router.post('/uploadImg',(req,res)=>{
                 avatar:AVATAR_UPLOAD_FOLDER + avatarName
               }
             }).then(function(avatarSave){
-              global.avatar=avatarSave.avatar;
-//            console.log(global.avatar)
-              if(avatarSave){               
+              if(avatarSave){  
+                var avatarUrl=AVATAR_UPLOAD_FOLDER + avatarName;
+                fs.unlinkSync(global.avatar);                
+                global.avatar=avatarUrl;
+//              console.log(global.avatar)                
                 return res.json({
                     "code": 200,
                     "message": "上传成功",
-                    result: AVATAR_UPLOAD_FOLDER + avatarName
+                    result: avatarUrl
                 })
               }else{
                 return res.json({
