@@ -25,22 +25,27 @@ router.get('/',(req,res)=>{
     page = 1;
   }
   let cate_id=req.query.cateId || '';
+  console.log(cate_id+'123')
   let where = {};
   if(cate_id){
     where.category = cate_id;
   }
   
-  Content.find().count().then(function(num){
+  Content.find(where).count().then(function(num){
 //      console.log(num);
     totalPage = Math.ceil(num/limit);
     page = Math.min(totalPage,page);
     page = Math.max(page,1);
     skip = (page - 1)*limit;
-    
+    User.findOne({_id:req.userInfo._id}).then(function(rs){
+      global.avatar=rs.avatar;
+    })
     Content.find(where).skip(skip).populate(['category','user']).limit(limit).sort({_id:-1}).then((content)=>{
 //    console.log(content);
+//    console.log(global.avatar);
       res.render('main/index',{
           userInfo:req.userInfo,
+          avatar:global.avatar,
           cates:data.cates,
           cateId:cate_id,
           contents:content,
@@ -54,6 +59,9 @@ router.get('/',(req,res)=>{
 router.get('/comment',(req,res)=>{
   let content_id=req.query.content;
   let cate_id=req.query.cateId || '';
+  User.findOne({_id:req.userInfo._id}).then(function(rs){
+      global.avatar=rs.avatar;
+  })
   Content.findOne({_id:content_id}).populate(['category','user']).sort({_id:-1}).then((content)=>{
     content.views++;
     content.save();
@@ -63,6 +71,7 @@ router.get('/comment',(req,res)=>{
 //  console.log(content.content);
     res.render('main/comment',{
       userInfo:req.userInfo,
+      avatar:global.avatar,
       cateId:cate_id,
       cates:data.cates,
       content:content

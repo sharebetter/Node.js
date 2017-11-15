@@ -9,5 +9,9 @@ module.exports = new mongoose.Schema({
 	isAdmin: {
 		type:Boolean,
 		default:false
+	},
+	avatar: {
+	  type:String,
+    default:'public/avatar/000.jpg'
 	}
 });

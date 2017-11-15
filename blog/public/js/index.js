@@ -136,7 +136,41 @@ $(function(){
           }
       },1000)
     }  
+//  头像修改
+    $('.avatar').click(function(){
+      $('#fileToUpload').stop().toggle(600)
+    })
+    $('.fileupload').change(function(event) {
+      if ($('.fileupload').val().length) {
+          var confirm=window.confirm("是否更换头像？")
+          if(confirm){
+            var fileName = $('.fileupload').val();
+            var extension = fileName.substring(fileName.lastIndexOf('.'), fileName.length).toLowerCase();
+            if (extension == ".jpg" || extension == ".png") {
+              var data = new FormData();
+              data.append('fulAvatar', $('#fileToUpload')[0].files[0]);
+              $.ajax({
+                  url: '/user/uploadImg',
+                  type: "post",
+                  data: data,
+                  cache: false,
+                  contentType: false, //不可缺参数
+                  processData: false, //不可缺参数
+                  success: function(data) {
+                      console.log('-------upload img:', data);
+                      $('img').attr('src',data.result);
+                  },
+                  error: function() {
+                      console.log('error');
+                  }
+              });
+            }
+          }
+          
+      }
+    });
     
+    //换页效果
     $('.blog-item').hide();
     $('.content-page').hide();
     

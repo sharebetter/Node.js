@@ -42,6 +42,9 @@
             <span>用户信息</span>
           </h4>
           <span class="username glod"> {{userInfo.username}} </span>
+          <img class="avatar" src="{{avatar}}"/>
+          <p></p>
+          <input type="file" name="fileToUpload" id="fileToUpload" class="fileupload"/>
           {% if userInfo.isadmin %}
           <p><span style="margin-right: 20px;">你好,你是管理员</span><a href="/admin">点击进入管理</a></p>
           {% else %}
