@@ -32,6 +32,7 @@ $(function(){
 //            console.log('成功');
               commentData=data.responseData;          
               commentAdd()
+              $('.input-group').find('[name="content"]').val('')
               $('.comment .message').html('评论成功！').stop().hide();
               $('.comment .message').stop().show(1000)
               setTimeout(function(){
@@ -81,6 +82,7 @@ $(function(){
             $('.no-msg').hide()
           }
         }
+        $('.comment-total').html(`一共有${comments.length}条评论`)
         var lis=page(comments.length,limit);        
         for(var i=lis.start;i<lis.end;i++){
           html+=
