@@ -31,13 +31,13 @@ router.get('/',(req,res)=>{
     where.category = cate_id;
   }
   
-  Content.find(where).count().then(function(num){
+  Content.find(where).count().then((num)=>{
 //      console.log(num);
     totalPage = Math.ceil(num/limit);
     page = Math.min(totalPage,page);
     page = Math.max(page,1);
     skip = (page - 1)*limit;
-    User.findOne({_id:req.userInfo._id}).then(function(rs){
+    User.findOne({_id:req.userInfo._id}).then((rs)=>{
       global.avatar=rs.avatar;
     })
     Content.find(where).skip(skip).populate(['category','user']).limit(limit).sort({_id:-1}).then((content)=>{
@@ -59,7 +59,7 @@ router.get('/',(req,res)=>{
 router.get('/comment',(req,res)=>{
   let content_id=req.query.content;
   let cate_id=req.query.cateId || '';
-  User.findOne({_id:req.userInfo._id}).then(function(rs){
+  User.findOne({_id:req.userInfo._id}).then((rs)=>{
       global.avatar=rs.avatar;
   })
   Content.findOne({_id:content_id}).populate(['category','user']).sort({_id:-1}).then((content)=>{
@@ -107,11 +107,11 @@ router.post('/addComment',(req,res)=>{
   })
 })
 
-router.post('/getComment',function(req, res, next){
-  var id = req.body.contentId || '';
+router.post('/getComment',(req, res, next)=>{
+  let id = req.body.contentId || '';
   Content.findOne({
     _id:id
-  }).then(function(contentInfo){
+  }).then((contentInfo)=>{
 //  console.log(contentInfo)
     responseData.comment = contentInfo.comment.reverse();
     res.json({

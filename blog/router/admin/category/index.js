@@ -13,14 +13,14 @@ router.get('/',(req,res)=>{
   }else{
     page = 1;
   }
-  Category.find().count().then(function(num){
+  Category.find().count().then((num)=>{
 //      console.log(num);
     totalPage = Math.ceil(num/limit);
     page = Math.min(totalPage,page);
     page = Math.max(page,1);
     skip = (page - 1)*limit;
     
-    Category.find().skip(skip).limit(limit).sort({_id:-1}).then(function(result){
+    Category.find().skip(skip).limit(limit).sort({_id:-1}).then((result)=>{
 //    console.log(result);
       res.render('admin/category/category_index',{
           userInfo:req.userInfo,
@@ -42,14 +42,14 @@ router.get('/index',(req,res)=>{
   }else{
     page = 1;
   }
-  Category.find().count().then(function(num){
+  Category.find().count().then((num)=>{
 //      console.log(num);
     totalPage = Math.ceil(num/limit);
     page = Math.min(totalPage,page);
     page = Math.max(page,1);
     skip = (page - 1)*limit;
     
-   Category.find().skip(skip).limit(limit).sort({_id:-1}).then(function(result){
+   Category.find().skip(skip).limit(limit).sort({_id:-1}).then((result)=>{
 //    console.log(result);
       res.render('admin/category/category_index',{
           userInfo:req.userInfo,
@@ -68,11 +68,11 @@ router.get('/add',(req,res)=>{
   })
 })
 //修改分类
-router.get('/edit',function(req,res, next){
+router.get('/edit',(req,res, next)=>{
   var id = req.query.id || '';
   Category.findOne({
     _id:id
-  }).then(function(cate){
+  }).then((cate)=>{
     
     if(!cate){
       res.render('admin/error',{
@@ -88,14 +88,14 @@ router.get('/edit',function(req,res, next){
     }
   })
 })
-router.post('/edit',function(req, res, next){
+router.post('/edit',(req, res, next)=>{
   
   var name = req.body.catename;
   var id = req.query.id;
 
   Category.findOne({
     _id:id
-  }).then(function(cate){
+  }).then((cate)=>{
     if(!cate){
       res.render('admin/error',{
         userInfo:req.userInfo,
@@ -127,7 +127,7 @@ router.post('/edit',function(req, res, next){
         }
       }
     }
-  }).then(function(hadCate){
+  }).then((hadCate)=>{
     if(hadCate){
       res.render('admin/error',{
         userInfo:req.userInfo,
@@ -142,7 +142,7 @@ router.post('/edit',function(req, res, next){
         name:name
       })
     }
-  }).then(function(){
+  }).then(()=>{
     res.render('admin/success',{
       userInfo:req.userInfo,
       message:'类名编辑成功',
@@ -162,7 +162,7 @@ router.post('/add',(req,res)=>{
   }
   Category.findOne({
       name:name
-    }).then(function(cateInfo){
+    }).then((cateInfo)=>{
 //    console.log(cateInfo)
       if(cateInfo){
         res.render('admin/error',{
@@ -175,7 +175,7 @@ router.post('/add',(req,res)=>{
           name:name
         }).save();
       }
-    }).then(function(cateInfo){
+    }).then((cateInfo)=>{
       if(cateInfo){
         res.render('admin/success',{
           cateInfo:cateInfo,
@@ -187,23 +187,23 @@ router.post('/add',(req,res)=>{
     })
 })
 //删除类
-router.get('/delete',function(req, res, next){
+router.get('/delete',(req, res, next)=>{
   var id = req.query._id;
 //console.log(id)
-//Category.findOne({_id:id}).then(function(rs){
+//Category.findOne({_id:id}).then((rs)=>{
 //  if(rs){
 //   
 //  }
 //})
-   Content.find({category:id}).then(function(content){     
+   Content.find({category:id}).then((content)=>{     
       if(content.length>0){
          res.json({'data':2})    /*类名下存在文章*/
       }else{
-          Category.findOne({_id:id}).then(function(rs){
+          Category.findOne({_id:id}).then((rs)=>{
             if(rs){
                Category.remove({
                 _id:id
-              }).then(function(data){
+              }).then((data)=>{
                 if(data){
                   res.json({'data':1}) /*成功*/
                 }else{

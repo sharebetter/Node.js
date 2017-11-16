@@ -41,7 +41,7 @@ app.use('/user',require('./router/user/index'))
 
 app.use("/public",express.static(__dirname+'/public'))
 
-mongoose.connect('mongodb://localhost:27017/blog', (err)=> {
+mongoose.connect('mongodb://localhost:27017/blog',{useMongoClient:true},(err)=> {
     if(err){
         console.log('数据库连接失败');
     }else{

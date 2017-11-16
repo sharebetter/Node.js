@@ -3,23 +3,23 @@ const express=require('express'),
       User = require('../../../models/User')
 
 router.get('/',(req,res)=>{
-  var page;
-  var limit = 4;
-  var totalPage = 0;
-  var skip;
+  let page;
+  let limit = 4;
+  let totalPage = 0;
+  let skip;
   if(!isNaN(req.query.page)){
     page = Number(req.query.page);
   }else{
     page = 1;
   }
-  User.find().count().then(function(num){
+  User.find().count().then((num)=>{
 //      console.log(num);
     totalPage = Math.ceil(num/limit);
     page = Math.min(totalPage,page);
     page = Math.max(page,1);
     skip = (page - 1)*limit;
     
-    User.find().skip(skip).limit(limit).sort({_id:-1}).then(function(result){
+    User.find().skip(skip).limit(limit).sort({_id:-1}).then((result)=>{
 //    console.log(result);
       res.render('admin/user/index',{
           userInfo:req.userInfo,
@@ -32,23 +32,23 @@ router.get('/',(req,res)=>{
   })
 })
 router.get('/index',(req,res)=>{
-  var page;
-  var limit = 4;
-  var totalPage = 0;
-  var skip;
+  let page;
+  let limit = 4;
+  let totalPage = 0;
+  let skip;
   if(!isNaN(req.query.page)){
     page = Number(req.query.page);
   }else{
     page = 1;
   }
-  User.find().count().then(function(num){
+  User.find().count().then((num)=>{
 //      console.log(num);
     totalPage = Math.ceil(num/limit);
     page = Math.min(totalPage,page);
     page = Math.max(page,1);
     skip = (page - 1)*limit;
     
-    User.find().skip(skip).limit(limit).then(function(result){
+    User.find().skip(skip).limit(limit).then((result)=>{
 //    console.log(result);
       res.render('admin/user/index',{
           userInfo:req.userInfo,

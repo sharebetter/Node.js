@@ -13,14 +13,14 @@ router.get('/',(req,res)=>{
   }else{
     page = 1;
   }
-  Content.find().count().then(function(num){
+  Content.find().count().then((num)=>{
 //      console.log(num);
     totalPage = Math.ceil(num/limit);
     page = Math.min(totalPage,page);
     page = Math.max(page,1);
     skip = (page - 1)*limit;
     
-    Content.find().skip(skip).sort({_id:-1}).populate(['category','user']).limit(limit).then(function(result){
+    Content.find().skip(skip).sort({_id:-1}).populate(['category','user']).limit(limit).then((result)=>{
 //    console.log(result);
       res.render('admin/content/content_index',{
           userInfo:req.userInfo,
@@ -35,7 +35,7 @@ router.get('/',(req,res)=>{
 
 //添加内容
 router.get('/add',(req,res)=>{
-  Category.find().then(function(result){
+  Category.find().then((result)=>{
     res.render('admin/content/content_add',{
         userInfo:req.userInfo,
         cates:result
@@ -43,13 +43,13 @@ router.get('/add',(req,res)=>{
   }) 
 })
 //删除内容
-router.get('/delete',function(req, res, next){
-  var id = req.query._id;
+router.get('/delete',(req, res, next)=>{
+  let id = req.query._id;
 //console.log(id)
 
   Content.remove({
       _id:id
-  }).then(function(data){
+  }).then((data)=>{
     if(data){
       res.json({'data':1})
     }else{
@@ -59,11 +59,11 @@ router.get('/delete',function(req, res, next){
   });
 });
 //修改内容
-router.get('/edit',function(req,res, next){
-  var id = req.query.id || '';
+router.get('/edit',(req,res, next)=>{
+  let id = req.query.id || '';
   Content.findOne({
     _id:id
-  }).then(function(contentInfo){    
+  }).then((contentInfo)=>{    
     if(!contentInfo){
       res.render('admin/error',{
         userInfo:req.userInfo,
@@ -71,7 +71,7 @@ router.get('/edit',function(req,res, next){
       })
       return Promise.reject();
     }else{
-      Category.find().then(function(cates){
+      Category.find().then((cates)=>{
         res.render('admin/content/content_edit',{
           userInfo:req.userInfo,
           contents:contentInfo,
@@ -82,7 +82,7 @@ router.get('/edit',function(req,res, next){
   })
 })
 //内容修改
-router.post('/edit',function(req, res, next){
+router.post('/edit',(req, res, next)=>{
   let id = req.body.content_id
   let title=req.body.title;
   let description=req.body.description;
@@ -107,7 +107,7 @@ router.post('/edit',function(req, res, next){
   }
   Content.findOne({
     _id:id
-  }).then(function(content){
+  }).then((content)=>{
 //  console.log(content)
     if(!content){
       res.render('admin/error',{
@@ -134,12 +134,13 @@ router.post('/edit',function(req, res, next){
             content:contents,
             category:category,
             description:description,
-            title:title
+            title:title,
+            date:new Date()
           }
         });
       }
     }
-  }).then(function(rs){
+  }).then((rs)=>{
     if(rs){
       res.render('admin/success',{
         userInfo:req.userInfo,
@@ -180,7 +181,7 @@ router.post('/add',(req,res)=>{
     description:description,
     content:content,
     user:userId
-  }).save().then(function(contentSave){
+  }).save().then((contentSave)=>{
     if(contentSave){
       res.render('admin/success',{
         userInfo:req.userInfo,
@@ -199,8 +200,8 @@ router.post('/add',(req,res)=>{
 
 })
 //删除类
-router.get('/delete',function(req, res, next){
-  var id = req.query._id || '';
+router.get('/delete',(req, res, next)=>{
+  let id = req.query._id || '';
   if(!id){
     res.render('admin/error',{
       userInfo:req.userInfo,
@@ -210,7 +211,7 @@ router.get('/delete',function(req, res, next){
   }
   Content.findOne({
     _id:id
-  }).then(function(content){
+  }).then((content)=>{
     if(!content){
       res.render('admin/error',{
         userInfo:req.userInfo,
@@ -222,7 +223,7 @@ router.get('/delete',function(req, res, next){
         _id:id
       })
     }
-  }).then(function(rs){
+  }).then((rs)=>{
    if(rs){
       res.json({'data':1})
     }else{

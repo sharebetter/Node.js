@@ -53,7 +53,7 @@ $(function(){
           },
           success:function(data){
             if(data.status===1){
-  //          console.log('成功')
+//            console.log('成功')
               commentData=data.responseData;
   //          console.log(data.responseData);              
               commentAdd();                   
@@ -73,6 +73,13 @@ $(function(){
         if(comments.length==0){
           minPage=0;
           currentPage=0;
+        }
+        if(comments.length===1){
+          minPage=1;
+          currentPage=1;
+          if($('.no-msg')){
+            $('.no-msg').hide()
+          }
         }
         var lis=page(comments.length,limit);        
         for(var i=lis.start;i<lis.end;i++){

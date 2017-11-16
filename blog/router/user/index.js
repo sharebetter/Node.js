@@ -6,8 +6,8 @@ const express=require('express'),
       AVATAR_UPLOAD_FOLDER = 'public/avatar/',/*设置头像保存目录*/
       router=express.Router()
       
-var responseData;
-router.use(function(req, res , next){
+let responseData;
+router.use((req, res , next)=>{
   //每次调用api下面的这个都被初始化，code为0
   responseData = {
     code:0,
@@ -30,9 +30,9 @@ router.post('/logout',(req,res)=>{
 
 router.post('/regist',(req,res)=>{
 //    console.log(req.body);
-      var username = req.body.user;
-      var password = req.body.pass;
-      var repassword = req.body.repass;
+      let username = req.body.user;
+      let password = req.body.pass;
+      let repassword = req.body.repass;
     
       //用户名是否为空；
       if(username === ''){
@@ -59,7 +59,7 @@ router.post('/regist',(req,res)=>{
       }
       User.findOne({
         username:username
-      }).then(function(userinfo){
+      }).then((userinfo)=>{
         if(userinfo){
           //表示有数
           responseData.code = 4;
@@ -68,7 +68,7 @@ router.post('/regist',(req,res)=>{
           return;
         }else{
           //表示没有数据
-          var user = new User({
+          let user = new User({
             username:username,
             password:password
           });
@@ -89,8 +89,8 @@ router.post('/regist',(req,res)=>{
 })
 
 router.post('/login',(req, res, next)=>{
-  var username = req.body.user;
-  var password = req.body.pass;
+  let username = req.body.user;
+  let password = req.body.pass;
   if(!username) {
     responseData.code = 1;
     responseData.message = '用户名不能为空';
@@ -108,7 +108,7 @@ router.post('/login',(req, res, next)=>{
   User.findOne({
     username:username,
     password:password
-  }).then(function(userinfo) {
+  }).then((userinfo)=>{
 
     if(!userinfo){
       responseData.code = 3;
@@ -137,13 +137,13 @@ router.post('/login',(req, res, next)=>{
 //头像修改
 router.post('/uploadImg',(req,res)=>{
 //console.log(233)
-   var form = new formidable.IncomingForm();   //创建上传表单
+   let form = new formidable.IncomingForm();   //创建上传表单
     form.encoding = 'utf-8';        //设置编辑
     form.uploadDir = AVATAR_UPLOAD_FOLDER;    //设置上传目录
     form.keepExtensions = true;  //保留后缀
     form.maxFieldsSize = 2 * 1024 * 1024;   //文件大小
 
-    form.parse(req, function (err, fields, files) {
+    form.parse(req,  (err, fields, files)=>{
 
         if (err) {
             return res.json({
@@ -161,7 +161,7 @@ router.post('/uploadImg',(req,res)=>{
             })
         }
 
-        var extName = '';  //后缀名
+        let extName = '';  //后缀名
         switch (files.fulAvatar.type) {
             case 'image/pjpeg':
                 extName = 'jpg';
@@ -185,17 +185,17 @@ router.post('/uploadImg',(req,res)=>{
         }
 
         //使用第三方模块silly-datetime
-        var t = sd.format(new Date(), 'YYYYMMDDHHmmss');
+        let t = sd.format(new Date(), 'YYYYMMDDHHmmss');
         //生成随机数
-        var ran = parseInt(Math.random() * 8999 + 10000);
+        let ran = parseInt(Math.random() * 8999 + 10000);
 
         // 生成新图片名称
-        var avatarName = t + '_' + ran + '.' + extName;
+        let avatarName = t + '_' + ran + '.' + extName;
         // 新图片路径
-        var newPath = form.uploadDir + avatarName;
+        let newPath = form.uploadDir + avatarName;
 
         // 更改名字和路径
-        fs.rename(files.fulAvatar.path, newPath, function (err) {
+        fs.rename(files.fulAvatar.path, newPath,(err)=>{
             if (err) {
                 return res.json({
                     "code": 401,
@@ -209,10 +209,12 @@ router.post('/uploadImg',(req,res)=>{
               $set:{
                 avatar:AVATAR_UPLOAD_FOLDER + avatarName
               }
-            }).then(function(avatarSave){
+            }).then((avatarSave)=>{
               if(avatarSave){  
-                var avatarUrl=AVATAR_UPLOAD_FOLDER + avatarName;
-                fs.unlinkSync(global.avatar);                
+                let avatarUrl=AVATAR_UPLOAD_FOLDER + avatarName;
+                if(global.avatar!=='public/avatar/000.jpg'){
+                  fs.unlinkSync(global.avatar); 
+                }                               
                 global.avatar=avatarUrl;
 //              console.log(global.avatar)                
                 return res.json({
