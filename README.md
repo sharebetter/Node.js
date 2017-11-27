@@ -1,9 +1,9 @@
 # Node.js
-node express框架的案例
+### node express框架的案例
 
 ## 项目说明
 ### express项目：
-> node express,mysql,包含用户登录注册等表单提交功能，ajax交互，session,cookie用户信息保存。
+>  node express,mysql,包含用户登录注册等表单提交功能，ajax交互，session,cookie用户信息保存。
 
 ### blog项目：
 > 1.  node express,mongodb,mongose,ajax交互，前后端分离的博客项目
@@ -13,7 +13,7 @@ node express框架的案例
 
 ### vue+express项目：
 > 主要技术栈: 
-　vue-cli 2.0全家桶 + node express框架 + mongodb数据库 + vuex + axios
+　　vue-cli 2.0全家桶 + node express框架 + mongodb数据库 + vuex + axios
 
 #### 项目说明：
 > 1. node express,mongodb,mongose,axios交互，前后端分离的商城项目
