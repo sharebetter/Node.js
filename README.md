@@ -3,7 +3,7 @@
 
 ## 项目说明
 ### express项目：
->　　node express,mysql,包含用户登录注册等表单提交功能，ajax交互，session,cookie用户信息保存。
+>　node express,mysql,包含用户登录注册等表单提交功能，ajax交互，session,cookie用户信息保存。
 
 ### blog项目：
 > 1.  node express,mongodb,mongose,ajax交互，前后端分离的博客项目
