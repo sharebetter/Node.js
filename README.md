@@ -17,8 +17,8 @@ node express框架的案例
 
 #### 项目说明：
 > 1. node express,mongodb,mongose,axios交互，前后端分离的商城项目
-　　前端vue：vue文件夹　　后端express:express文件夹。
-2. session保存用户信息，用户可以购物车添加和删除，收货地址选择等。
-3. 分别通过axios.get()和axios.post()进行用户信息获取和提交,与后台express配合，进行数据交互，通过proxyTable代理,解决不同端口的跨域问题。
-4.  vuex解决多个页面组件调用状态的更改,进行信息的同步更改，省去父子组件之间频繁的数值传递。
+>　　前端vue：vue文件夹　　后端express:express文件夹。
+> 2. session保存用户信息，用户可以购物车添加和删除，收货地址选择等。
+> 3. 分别通过axios.get()和axios.post()进行用户信息获取和提交,与后台express配合，进行数据交互，通过proxyTable代理,解决不同端口的跨域问题。
+> 4.  vuex解决多个页面组件调用状态的更改,进行信息的同步更改，省去父子组件之间频繁的数值传递。
 
